@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rv</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Rupeevest</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connect with us <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="-1" target="_blank" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=info@rupeevest.com&amp;su=Query%20Regarding%20Rupeevest">Gmail</a></li>
+          <li><a tabindex="-1" target="_blank" href="http://compose.mail.yahoo.com/?to=info@rupeevest.com&amp;subject=Query%20Regarding%20Rupeevest">Yahoo</a></li>
+          <li><a tabindex="-1" target="_blank" href="https://mail.live.com/default.aspx?rru=compose&amp;to=info@rupeevest.com&amp;subject=Query%20Regarding%20Rupeevest">Hotmail, Outlook, Live Mail</a></li>
+        </ul>
+      </li>
+    </ul>
+    
+
+    <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.name, root_path %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>   
+        <% else %>
+          <a href="/users/sign_up" class="btn btn-default">Register</a>
+          <a href="/users/sign_in" class="btn btn-default">Log In</a> 
+        <% end %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+<body>
+
+  <div class="container-fluid"> 
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button class="close" data-dismiss="alert">x</button>
+        <%= flash[:notice] %>
+      </div>
+    <%end%>
+    <% if flash[:alert] %>
+      <div class="alert alert-faliure">
+        <button class="close" data-dismiss="alert">x</button>
+        <%= flash[:alert] %>
+      </div>
+    <%end%>
+  </div>
+
+<%= yield %>
+
+
+
+</body>
+<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+  <div class="container">
+    copy right RV
+  </div>
+</nav>
+
+</html>
