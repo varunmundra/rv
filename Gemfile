@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+group :production do
+  gem 'rails_12factor', '0.0.2'
+  gem 'thin'
+end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
