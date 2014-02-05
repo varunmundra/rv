@@ -9,6 +9,7 @@
 
   <div class="form-actions">
     <%= f.button :submit, "Sign in" %>
+    <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
   </div>
 <% end %>
 

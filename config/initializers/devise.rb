@@ -6,6 +6,9 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
+   require "omniauth-google-oauth2"
+  config.omniauth :google_oauth2, "285134810130.apps.googleusercontent.com", "lOHPJhfHMfVBB1qL4jOmXSpH", { access_type: "offline", approval_prompt: "" }
+  
   config.secret_key = 'e357ed6fc32499640a1e9cfef6321acb50ac2a491d9d755e0ffb4ba64ee08013a3daa200ac68e540277f9440fa0269e3b2a97a6b8b9279325774b5978fb32fd3'
 
   # ==> Mailer Configuration
