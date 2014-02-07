@@ -40,3 +40,4 @@ gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'simple_form'
 gem 'country_select'
+gem 'wicked'

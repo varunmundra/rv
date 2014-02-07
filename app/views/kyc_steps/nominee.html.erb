@@ -1,0 +1,21 @@
+<%= simple_form_for @kyc, url: wizard_path  do |f| %>
+   
+<h2>Nominee Details</h2>
+	<%= f.input :nominee_name, label:'Nominee Name' %>
+	<%= f.input :nominee_relation, label:'Nominee Relation' %>
+	<%= f.input :nominee_address, label:'Nominee Address' %>
+	
+
+
+  
+	
+
+
+	
+  <p><%= f.submit "Continue" %></p>
+  
+<% end %>
+
+
+
+	

@@ -11,10 +11,79 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204103346) do
+ActiveRecord::Schema.define(version: 20140207102400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "banks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name_of_bank"
+    t.string   "account_num"
+    t.string   "account_type"
+    t.string   "mode_of_holding"
+    t.string   "first_holder"
+    t.string   "second_holder"
+    t.string   "branch_address"
+    t.string   "city"
+    t.string   "ifsc_code"
+    t.string   "micr_code"
+    t.integer  "sip_mandate_status"
+    t.integer  "sip_validity"
+    t.float    "sip_upper_limit"
+    t.string   "umrn"
+    t.string   "reason"
+    t.string   "bankid_pg"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "kycs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "holding_priority"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "father_spouse_name"
+    t.string   "gender"
+    t.string   "marital_status"
+    t.date     "date_of_birth"
+    t.string   "nationality"
+    t.string   "residence_status"
+    t.string   "pan"
+    t.string   "proof_of_identity"
+    t.string   "c_house_no"
+    t.string   "c_street_name"
+    t.string   "c_area_name"
+    t.string   "c_city_town_village"
+    t.string   "c_state"
+    t.string   "c_country"
+    t.string   "c_postal_code"
+    t.string   "c_landline"
+    t.string   "c_mobile"
+    t.string   "c_email"
+    t.string   "c_proof_of_address"
+    t.boolean  "same"
+    t.string   "p_house_no"
+    t.string   "p_street_name"
+    t.string   "p_area_name"
+    t.string   "p_city_town_village"
+    t.string   "p_state"
+    t.string   "p_country"
+    t.string   "p_postal_code"
+    t.string   "p_landline"
+    t.string   "p_mobile"
+    t.string   "p_email"
+    t.string   "p_proof_of_address"
+    t.float    "annual_income"
+    t.string   "occupation"
+    t.string   "pep_status"
+    t.string   "nominee_name"
+    t.string   "nominee_relation"
+    t.string   "nominee_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "part_validation"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -41,6 +110,8 @@ ActiveRecord::Schema.define(version: 20140204103346) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.integer  "tax_status"
+    t.string   "holding_type"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
