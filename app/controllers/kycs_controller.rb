@@ -1,29 +1,35 @@
 class KycsController < ApplicationController
 
-  def new
-  	if current_user.holding_type == 'Single'
-	  	if current_user.kyc_status != (1||2||3||4) # 1-> partial kyc done 2->fullkyc done 3->kyc submitted 4-> kyc compliant
-	    	@kyc = Kyc.new
-	    else
-	    	@kyc = Kyc.find_by_user_id(current_user.id)
-	    end
-	end
-	if current_user.holding_type == 'Joint2'
-	  	if current_user.kyc_status != (1||2||3||4) # 1-> partial kyc done 2->fullkyc done 3->kyc submitted 4-> kyc compliant
-	    	@kyc = Kyc.new
-	    else
-	    	@kyc = Kyc.find_by_user_id(current_user.id)
-	    end
-	end
+
+  def update_holding_type
+  	if params[:holding_type]
+	  	current_user.holding_type = params[:holding_type]
+	  	current_user.save
+	
+	  	for i in 0..(current_user.holding_type.to_i-1)
+	   		kyc = Kyc.new
+	  		kyc.user_id = current_user.id
+	  		kyc.holding_priority = (i+1).to_s
+	  		kyc.part_validation = 'new'
+	  		kyc.save
+		end
+  	end
+	
+
   end
 
+
+  def new
+	@kyc = Kyc.find(:first, :conditions => ["user_id = ? AND holding_priority = ? ",current_user.id, params[:priority]])
+  	session[:priority] = params[:priority]
+  end
+
+
+
   def create
+
     @kyc = Kyc.new(kyc_params)
-    @kyc.user_id = current_user.id
-    if current_user.holding_type == 'Single'
-    	@kyc.holding_priority = '1st Holder'
-    end
-    @kyc.part_validation = 'personal'
+    @kyc.part_validation = 'general'
     if @kyc.save		
       current_user.kyc_status = 1 #partial kyc done
       current_user.save
@@ -34,8 +40,8 @@ class KycsController < ApplicationController
   end
 
   def update
-  	   @kyc = Kyc.find_by_user_id(current_user.id)	
-  	   @kyc.part_validation = 'personal'
+  	   @kyc = Kyc.find(:first, :conditions => ["user_id = ? AND holding_priority = ? ",current_user.id, session[:priority]])
+  	   @kyc.part_validation = 'general'
        if @kyc.update_attributes(kyc_params)
        		redirect_to kyc_steps_path
        else

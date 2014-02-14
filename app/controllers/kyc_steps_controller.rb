@@ -1,16 +1,30 @@
 class KycStepsController < ApplicationController
   include Wicked::Wizard
-  steps  :c_address, :p_address, :nominee
+  steps  :personal,:c_address, :p_address, :nominee
   
   def show
-  	@kyc = Kyc.find_by_user_id(current_user.id) # incorporate holding priority check for joint users
+  	@kyc = Kyc.find(:first, :conditions => ["user_id = ? AND holding_priority = ? ",current_user.id, session[:priority]])
     render_wizard
   end
 
   def update
-	  @kyc = Kyc.find_by_user_id(current_user.id)
+	  @kyc = Kyc.find(:first, :conditions => ["user_id = ? AND holding_priority = ? ",current_user.id, session[:priority]])
   	  @kyc.part_validation = step.to_s
   	  @kyc.part_validation = 'active' if step == steps.last	
+  	  if @kyc.same
+  	  	@kyc.p_house_no = @kyc.c_house_no
+    	@kyc.p_street_name = @kyc.c_street_name
+    	@kyc.p_area_name = @kyc.c_area_name
+    	@kyc.p_state = @kyc.c_state
+    	@kyc.p_city_town_village = @kyc.c_city_town_village
+    	@kyc.p_country =@kyc.c_country
+    	@kyc.p_landline = @kyc.c_landline
+    	@kyc.p_mobile = @kyc.c_mobile
+    	@kyc.p_email = @kyc.c_email
+    	@kyc.p_postal_code = @kyc.c_postal_code
+    	@kyc.p_proof_of_address = @kyc.c_proof_of_address
+    	@kyc.save
+  	  end
 	  @kyc.update_attributes(kyc_params1)
 	  render_wizard @kyc
   end

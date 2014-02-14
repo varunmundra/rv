@@ -3,8 +3,8 @@
 	<%= f.input :c_house_no, label:'House Number' %>
 	<%= f.input :c_street_name, label:'Street Name' %>
 	<%= f.input :c_area_name, label:'Area Name' %>
-	<%= f.input :c_city_town_village, label:'City' ,collection: ["Agra",	"Ahmedabad",	"Ajmer",	"Allahabad",	"Amritsar",	"Anand",	"Asansol",	"Aurangabad",	"Bangalore",	"Baroda",	"Bharuch",	"Bhavnagar",	"Bhopal",	"Bhubaneswar",	"Calicut",	"Chandigarh",	"Chennai",	"Coimbatore",	"Dehradun",	"Dharwad",	"Dubai",	"Durgapur",	"Erode",	"Guntur",	"Guwahati",	"Hubli",	"Hyderabad",	"Indore",	"Jaipur",	"Jalandhar",	"Jalgaon",	"Jamnagar",	"Jamshedpur",	"Jodpur",	"Kanpur",	"Karaikudi",	"Kochi",	"Kolkata",	"Kota",	"Kottayam",	"Lucknow",	"Ludhiana",	"Mangalore",	"Meerut",	"Moradabad",	"Mumbai",	"Mysore",	"Nagpur",	"Nasik",	"New Delhi",	"Panjim",	"Patna",	"Pondicherry",	"Pune",	"Raipur",	"Rajahmundry",	"Rajkot",	"Ranchi",	"Salem",	"Siliguri",	"Surat",	"Tirunelveli",	"Tirupur",	"Trichy",	"Trivandrum",	"Udaipur",	"Varanasi",	"Vashi",	"Vijayawada",	"Others"] %>
-	<%= f.input :c_state, label:'State',collection: ["Andhra Pradesh",	"Arunachal Pradesh",	"Assam",	"Bihar",	"Chandigarh",	"Delhi",	"Goa",	"Gujarat",	"Haryana",	"Himachal Pradesh",	"Jammu And Kashmir",	"Karnataka",	"Kerala",	"Madhya Pradesh",	"Maharashtra",	"Manipur",	"Meghalaya",	"Mizoram",	"Nagaland",	"Orissa",	"Punjab",	"Rajasthan",	"Tamil Nadu",	"Tripura",	"Uttar Pradesh",	"West Bengal",	"Others"] %>
+	<%= f.input :c_city_town_village, label:'City' ,collection: ["Agra",	"Ahmedabad",	"Ajmer",	"Allahabad",	"Amritsar",	"Anand",	"Asansol",	"Aurangabad",	"Bangalore",	"Baroda",	"Bharuch",	"Bhavnagar",	"Bhopal",	"Bhubaneswar",	"Calicut",	"Chandigarh",	"Chennai",	"Coimbatore",	"Dehradun",	"Dharwad",	"Dubai",	"Durgapur",	"Erode",	"Guntur",	"Guwahati",	"Hubli",	"Hyderabad",	"Indore",	"Jaipur",	"Jalandhar",	"Jalgaon",	"Jamnagar",	"Jamshedpur",	"Jodpur",	"Kanpur",	"Karaikudi",	"Kochi",	"Kolkata",	"Kota",	"Kottayam",	"Lucknow",	"Ludhiana",	"Mangalore",	"Meerut",	"Moradabad",	"Mumbai",	"Mysore",	"Nagpur",	"Nasik",	"New Delhi",	"Panjim",	"Patna",	"Pondicherry",	"Pune",	"Raipur",	"Rajahmundry",	"Rajkot",	"Ranchi",	"Salem",	"Siliguri",	"Surat",	"Tirunelveli",	"Tirupur",	"Trichy",	"Trivandrum",	"Udaipur",	"Varanasi",	"Vashi",	"Vijayawada",	"Others"],:include_blank => false %>
+	<%= f.input :c_state, label:'State',collection: ["Andhra Pradesh",	"Arunachal Pradesh",	"Assam",	"Bihar",	"Chandigarh",	"Delhi",	"Goa",	"Gujarat",	"Haryana",	"Himachal Pradesh",	"Jammu And Kashmir",	"Karnataka",	"Kerala",	"Madhya Pradesh",	"Maharashtra",	"Manipur",	"Meghalaya",	"Mizoram",	"Nagaland",	"Orissa",	"Punjab",	"Rajasthan",	"Tamil Nadu",	"Tripura",	"Uttar Pradesh",	"West Bengal",	"Others"],:include_blank => false %>
 	<%= f.input :c_country, label:'Country' ,priority: [ "India" ] %>
 	<%= f.input :c_postal_code, label:'Postal Code' %>
 	<%= f.input :c_landline, label:'Landline no.' %>
@@ -13,7 +13,7 @@
 	<%= f.input :c_proof_of_address, label:'Proof of Address',collection: [ "Passport", "Ration Card","Registered Lease / Sale Agreement of Residence","Driving License","Voter Identity Card","Latest Bank Account Statement/Passbook", "Latest Telephone Bill (only Land Line)","Latest Electricity Bill","Latest Gas Bill","Others(Not more than 3 months old)"],:include_blank => false %>
 
     
-
+	<%=f.input :same, hint:'Permanent Address is same as correspondence address', input_html: { id: 'checkbox1' }, label: false,value:true %> 
   			
   
 	
