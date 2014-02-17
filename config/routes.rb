@@ -6,9 +6,17 @@ Rv::Application.routes.draw do
   match '/products', to: 'static_pages#products', via: 'get'
   resources :kycs
   resources :kyc_steps
+  resources :funds
   post "kycs/update_holding_type"
   post "kycs/new"
   resources :banks
+  resources :transactions do 
+    collection do
+      get :investment
+      post :invoice
+      
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,6 +11,7 @@ class CreateFunds < ActiveRecord::Migration
 	  t.string :pg_scheme_code
 	  t.string :prodcode
 	  t.string :fund_type
+	  t.string :classification
       t.string :scheme_name
       t.date :launch_date
       t.integer :min_investment

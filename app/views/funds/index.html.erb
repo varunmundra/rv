@@ -1,0 +1,64 @@
+<script type="text/javascript">
+$(document).ready(function () {
+     
+   oTable = $('#funds12').dataTable({
+        "bJQueryUI": true
+
+
+    }).yadcf([{
+        column_number: 0,
+         filter_type: "auto_complete" ,
+        text_data_delimiter: ","
+    }, {
+        column_number: 1
+    }, {
+        column_number: 2,
+        filter_type: "range_number_slider"
+    }, {
+        column_number: 3
+    }
+    ]);
+
+
+     
+});
+
+</script>
+<style type="text/css">
+  .css_right {float:right}
+</style>
+
+
+<%= form_tag investment_transactions_path, :method => :get  do %> 
+
+
+<table id = "funds12" class="display">
+<thead>
+  <tr>
+    <th>Fund Name</th>
+    <th>Category</th>
+    <th>Average AUM</th>
+    <th>Fund Type</th>
+    <th>Expense Ratio</th>
+    <th>Check</th> -->
+  </tr>
+</thead>
+<tbody>
+  <% @funds.each do |fund| %>
+    <tr>
+      <td><%= link_to "#{fund.scheme_name}", fund_path(fund.id) %></td>
+      <td><%= fund.category %></td>
+      <td><%= fund.net_assets %></td>
+      <td><%= fund.fund_type %></td>
+      <td><%= fund.expense_ratio %></td>
+      <td><%= check_box_tag "fund_ids[]", fund.id %></td> 
+    </tr>
+  <% end %>
+ </tbody>
+
+</table>
+
+
+<%= submit_tag "Select Funds" %>
+
+<% end %>

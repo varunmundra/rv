@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211174239) do
+ActiveRecord::Schema.define(version: 20140215123345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,27 @@ ActiveRecord::Schema.define(version: 20140211174239) do
     t.datetime "updated_at"
   end
 
+  create_table "due_transactions", force: true do |t|
+    t.integer  "transaction_id"
+    t.date     "due_date"
+    t.string   "sip_registration_no"
+    t.string   "sip_counter"
+    t.integer  "sip_installments"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feeds", force: true do |t|
+    t.integer  "transaction_id"
+    t.text     "registrar_feed"
+    t.text     "registrar_reverse_feed"
+    t.text     "pg_feed"
+    t.text     "pg_reverse_feed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "funds", force: true do |t|
     t.string   "amfi_code"
     t.string   "datasource_code"
@@ -49,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140211174239) do
     t.string   "pg_scheme_code"
     t.string   "prodcode"
     t.string   "fund_type"
+    t.string   "classification"
     t.string   "scheme_name"
     t.date     "launch_date"
     t.integer  "min_investment"
@@ -225,6 +247,41 @@ ActiveRecord::Schema.define(version: 20140211174239) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "part_validation"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "bank_id"
+    t.integer  "fund_id"
+    t.string   "tr_id"
+    t.string   "reinvestment_tag"
+    t.string   "tr_type"
+    t.string   "tr_mode"
+    t.float    "amount"
+    t.float    "units"
+    t.float    "price_per_unit"
+    t.date     "tr_date"
+    t.date     "date"
+    t.date     "sip_start_date"
+    t.string   "sip_registration_no"
+    t.string   "sip_frequency"
+    t.integer  "sip_installments"
+    t.integer  "sip_installment_count"
+    t.string   "folio_id"
+    t.string   "registrar"
+    t.string   "registrar_tr_status"
+    t.string   "registrar_tr_status_reason"
+    t.string   "pg_tr_status"
+    t.string   "pg_tr_status_reason"
+    t.string   "checksum"
+    t.string   "liq_non"
+    t.string   "error_status"
+    t.string   "error_desc"
+    t.string   "auth_status"
+    t.float    "transaction_charges"
+    t.string   "euin_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

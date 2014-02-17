@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rupeevest</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <%= csrf_meta_tags %>
+  
+  
+</head>
+<script type="text/javascript">
+
+ 
+ 
+
+        $(document).ready(function () {
+ 
+            var fund_data = [
+                [1, <%= @fund.fund_ytd %>],
+                [2, <%= @fund.fund_3month %>],
+                [3, <%= @fund.fund_1year %>],
+                [4, <%= @fund.fund_3year %>],
+                [5, <%= @fund.fund_5year %>]
+            ];
+            var category_data = [
+                [1, <%= @fund.category_ytd %>],
+                [2, <%= @fund.category_3month %>],
+                [3, <%= @fund.category_1year %>],
+                [4, <%= @fund.category_3year %>],
+                [5, <%= @fund.category_5year %>]
+            ];
+             var benchmark_data = [
+                [1, <%= @fund.benchmark_ytd %>],
+                [2, <%= @fund.benchmark_3month %>],
+                [3, <%= @fund.benchmark_1year %>],
+                [4, <%= @fund.benchmark_3year %>],
+                [5, <%= @fund.benchmark_5year %>]
+            ];
+ 
+            var data = [
+                {label: "<%= @fund.scheme_name %>", data: fund_data, bars: {fillColor: "#336600"}, color: "#336600"},
+                {label: "<%= @fund.category %>", data: category_data, bars: {fillColor: "#E41B17"}, color: "#E41B17"},
+                {label: "<%= @fund.benchmark %>", data: category_data, bars: {fillColor: "#0000FF"}, color: "#0000FF"}
+            ];
+            var options = {
+                xaxis: {
+                    min: 0,
+                    max: 7,
+                    mode: null,
+                    ticks: [
+                        [1, "YTD"],
+                        [2, "6M Return"],
+                        [3, "1YR Return"],
+                        [4, "3YR Return"],
+                        [5, "5Yr Return"]
+                    ],
+                    tickLength: 0,
+                    axisLabel: " Tenure (in years)",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
+                    axisLabelPadding: 5
+                }, yaxis: {
+                    axisLabel: "Annualized return (in %age)",
+                    tickDecimals: 0,
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
+                    axisLabelPadding: 5
+                }, grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 1
+                }, legend: {
+                    labelBoxBorderColor: "none",
+                    position: "right"
+                }, series: {
+                    shadowSize: 1,
+                    bars: {
+                        show: true,
+                        barWidth: 0.25,
+                        order: 1
+                    }
+                }
+            };
+ 
+            $.plot($("#placeholder"), data, options);
+ 
+
+
+
+
+ 			var fund_data2 = [
+                [1, <%= @fund.holdings1_asset %>],
+                [2, <%= @fund.holdings2_asset %>],
+                [3, <%= @fund.holdings3_asset %>],
+                [4, <%= @fund.holdings4_asset %>],
+                [5, <%= @fund.holdings5_asset %>]
+            ];
+          
+ 
+            var data2 = [
+                {label: "<%= @fund.scheme_name %>", data: fund_data2, bars: {fillColor: "#336600"}, color: "#336600"}
+            ];
+            var options2 = {
+                xaxis: {
+                    min: 0,
+                    max: 7,
+                    mode: null,
+                    ticks: [
+                        [1, "<%= @fund.holdings1_company %>"],
+                        [2, "<%= @fund.holdings2_company %>"],
+                        [3, "<%= @fund.holdings3_company %>"],
+                        [4, "<%= @fund.holdings4_company %>"],
+                        [5, "<%= @fund.holdings5_company %>"]
+                    ],
+                    tickLength: 0,
+                    axisLabel: "Companies",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
+                    axisLabelPadding: 5
+                }, yaxis: {
+                    axisLabel: "PErcentage of total assets ",
+                    tickDecimals: 0,
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
+                    axisLabelPadding: 5
+                }, grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 1
+                }, legend: {
+                    labelBoxBorderColor: "none",
+                    position: "right"
+                }, series: {
+                    shadowSize: 1,
+                    bars: {
+                        show: true,
+                        barWidth: 0.25,
+                        order: 1
+                    }
+                }
+            };
+ 
+            $.plot($("#placeholder2"), data2, options2);
+ 
+        });
+
+
+
+
+
+
+
+</script>
+
+    <style type="text/css">
+        #placeholder {
+            width: 800px;
+            height: 500px;
+            position: relative;
+            margin: 0 auto;
+        }
+ 
+        .legend table, .legend > div {
+            height: 82px !important;
+            opacity: 1 !important;
+            top: 10px;
+            right: 10px;
+            width: 116px !important;
+        }
+ 
+        .legend table {
+            border-spacing: 5px;
+            border: 1px solid #555;
+            padding: 2px;
+        }
+         #placeholder2 {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            margin: 0 auto;
+        }
+    </style>
+
+
+<body id="bodyshowfund">
+
+	    
+	<div id="sidebar">
+				
+				<!-- <div id="logo"> <a href="/"><img src="img/logo.svg" alt="logo" /></a> </div> -->
+				<nav id="nav" >
+					<ul class="nav nav-pills" id= "sidebarelements" >
+					<li><a href="#" class="scroller" data-section="#generaldetails" id="sidebarelement"><font color="#fff">General Details</font></a></li>
+					<br>
+	                    <li><a href="#" class="scroller" data-section="#performance" id="sidebarelement"><font color="#fff">Performance</font></a></li>
+                    <br>                    
+                    <li><a href="#" class="scroller" data-section="#investmentdetails" id="sidebarelement"><font color="#fff">Investment Details</font></a></li>
+                    <br>
+                    <li><a href="#" class="scroller" data-section="#risk" id="sidebarelement"><font color="#fff">Risk</font></a></li>
+					</ul>
+				</nav><!-- /nav -->
+			</div>
+
+
+
+
+
+
+    <!-- end Navbar -->
+
+
+    
+    <!-- #intro -->
+	<div class="container" >
+		<center><h1><%= @fund.scheme_name %> Snapshot</h1></center>
+		<div class="container" id="generaldetails">	
+			<div class = "container" >
+				<h3>General Details</h3>
+			<div class="row span5">
+				<table class="table table-striped table-bordered">
+				  <tr>
+				  	<td>Scheme Name</td>
+				  	<td><%= @fund.scheme_name %></td>
+				  </tr>
+				  <tr>
+				  	<td>Fund Type</td>
+				  	<td><%= @fund.fund_type %></td>
+				  </tr>
+				  <tr>
+				  	<td>Dividend NAV (Rs)</td>
+				  	<td><%= @fund.nav %></td>
+				  </tr>
+				  <tr>
+				  	<td>Category</td>
+				  	<td><%= @fund.category %></td>
+				  </tr>
+				  <tr>
+				  	<td>Colour Code</td>
+				  	<td><%= @fund.colour_code %></td>
+				  </tr>
+				  
+
+				</table>
+			</div>
+			<div class="row  span5">
+				<table class="table table-striped table-bordered">
+				  <tr>
+				  	<td>Benchmark</td>
+				  	<td><%= @fund.benchmark %></td>
+				  </tr>
+				  <tr>
+				  	<td>Launch Date</td>
+				  	<td>
+				  	</td>
+				  </tr>
+				  <tr>
+				  	<td>Net Assets</td>
+				  	<td><%= @fund.net_assets %> cr</td>
+				  </tr>
+				  <tr>
+				  	<td>Exit Load</td>
+				  	<td><%= @fund.exit_load %></td>
+				  </tr>
+				  <tr>
+				  	<td>Expense Ratio</td>
+				  	<td><%= @fund.expense_ratio %>%</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+    <!-- ends Intro -->
+
+
+    
+    
+     <!-- #about -->
+<div class="container" id="performance">	
+			<div class = "container">
+				<h3>Performance</h3>
+			<div class="row span8 center offset1">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th></th>
+							<th>YTD</th>
+							<th>1 month</th>
+							<th>3 month</th>
+							<th>1 year</th>
+							<th>3 year</th>
+							<th>5 year</th>
+							<th>10 year</th>
+						</tr>
+					</thead>
+					<tbody>
+				  <tr>
+				  	<td>Fund</td>
+				  	<td><%= @fund.fund_ytd %></td>
+				  	<td><%= @fund.fund_1month %></td>
+				  	<td><%= @fund.fund_3month %></td>
+				  	<td><%= @fund.fund_1year %></td>
+				  	<td><%= @fund.fund_3year %></td>
+				  	<td><%= @fund.fund_5year %></td>
+				  	<td><%= @fund.fund_10year %></td>
+				  </tr>
+				  <tr>
+				  	<td><%= @fund.benchmark %></td>
+				  	<td><%= @fund.benchmark_ytd %></td>
+				  	<td><%= @fund.benchmark_1month %></td>
+				  	<td><%= @fund.benchmark_3month %></td>
+				  	<td><%= @fund.benchmark_1year %></td>
+				  	<td><%= @fund.benchmark_3year %></td>
+				  	<td><%= @fund.benchmark_5year %></td>
+				  	<td><%= @fund.benchmark_10year %></td>
+				  </tr>
+				  <tr>
+				  	<td>Category</td>
+				  	<td><%= @fund.category_ytd %></td>
+				  	<td><%= @fund.category_1month %></td>
+				  	<td><%= @fund.category_3month %></td>
+				  	<td><%= @fund.category_1year %></td>
+				  	<td><%= @fund.category_3year %></td>
+				  	<td><%= @fund.category_5year %></td>
+				  	<td><%= @fund.category_10year %></td>
+				  </tr>
+				  <tr>
+				  	<td>Rank within Category</td>
+				  	<td><%= @fund.rank_ytd %></td>
+				  	<td><%= @fund.rank_1month %></td>
+				  	<td><%= @fund.rank_3month %></td>
+				  	<td><%= @fund.rank_1year %></td>
+				  	<td><%= @fund.rank_3year %></td>
+				  	<td><%= @fund.rank_5year %></td>
+				  	<td><%= @fund.rank_10year %></td>
+				  </tr>
+				  <tr>
+				  	<td>Number of funds in Category</td>
+				  	<td><%= @fund.no_of_fund_ytd %></td>
+				  	<td><%= @fund.no_of_fund_1month %></td>
+				  	<td><%= @fund.no_of_fund_3month %></td>
+				  	<td><%= @fund.no_of_fund_1year %></td>
+				  	<td><%= @fund.no_of_fund_3year %></td>
+				  	<td><%= @fund.no_of_fund_5year %></td>
+				  	<td><%= @fund.no_of_fund_10year %></td>
+				  </tr>
+				  </tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+     <!-- ends About -->
+  
+            <div >
+					<br><br>
+					<div id="placeholder"></div>
+					
+				</div>
+      <!-- #team -->    
+<div class="container" id="investmentdetails">
+	<div class="container">
+		<h3>Investment Details</h3>
+		
+			<div class="row span5">
+				<h3>Amount</h3>
+				<table class="table table-striped table-bordered">
+				  <tr>
+				  	<td>Minimum Investment (Rs)</td>
+				  	<td><%= @fund.min_investment %></td>
+				  	
+				  </tr>
+				  <tr>
+				  	<td>Minimum SIP Investment (Rs)</td>
+				  	<td><%= @fund.min_sip_investment %></td>
+				  	
+				  </tr>
+				  <tr>
+				  	<td>Minimum no. of chqs</td>
+				  	<td><%= @fund.min_sip_chqs %></td>
+				  	
+				  </tr>
+				  <tr>
+				  	<td>Exit Load</td>
+				  	<td><%= @fund.exit_load %></td>
+				  	
+				  </tr>
+				</table>
+			</div>
+			
+			<div class="row span5">
+				<h3>Eligibility</h3>
+				<table class="table table-striped table-bordered">
+				  <tr>
+				  	<td>Indian</td>
+				  	<td>Yes</td>
+				  	
+				  </tr>
+				  <tr>
+				  	<td>NRI</td>
+				  	<td>Db entry req</td>
+				  	
+				  </tr>
+				  <tr>
+				  	<td>HUF</td>
+				  	<td>Yes</td>
+				  	
+				  </tr>
+				  
+				</table>
+			</div>
+		</div>
+	</div>
+      <!-- End Team -->  
+       	
+            <div >
+					<br><br>
+					<div id="placeholder2"></div>
+					
+				</div>
+	
+      <!-- #contact -->   	
+	<div class="container" id="risk">
+	<div class="container">
+		<h3>Risk</h3>	
+		<div class="row span8 center offset2">
+				<table class="table table-striped table-bordered">
+				  <tr>
+				  	<td>Colour Code</td>
+				  	<td>Risk Rating</td>
+				   	
+				  	
+				  </tr>
+				  <tr>
+				  	<td><%= @fund.colour_code %></td>
+				  	<td><% if @fund.colour_code == "Brown" %>High Risk<%end%>
+				  		<% if @fund.colour_code == "Yellow" %>Medium Risk<%end%>
+				  		<% if @fund.colour_code == "Blue" %>Low Risk<%end%>
+				  		</td>
+				  	
+				  	
+				  </tr>
+				  
+				  
+
+				</table>
+			</div>
+		
+	
+				
+	</div>
+	<%= link_to 'Back', {:action => 'index'} %>
+</div>   <!-- End Contact -->  
+</div>
+
+
+
+
+</body>
+
+
+<script>
+$(function () {
+    $(window).scroll(function(){
+    // global scroll to top button
+        if ($(this).scrollTop() > 300) {
+            $('.scrolltop').fadeIn();
+        } else {
+            $('.scrolltop').fadeOut();
+        }        
+    });
+    
+    // scroll nav
+    $('.scroller').click(function(){
+    	var section = $($(this).data("section"));
+    	var top = section.offset().top-82;
+        $("html, body").animate({ scrollTop: top }, 700);
+        return false;
+    });
+
+
+});
+</script>
+
