@@ -1,0 +1,28 @@
+<%= form_tag update_individual_transactions_path :method => :put do %>
+  <% for transaction in @transactions %>
+    <%= fields_for "transactions[]", transaction do |f| %>
+
+    <% if transaction.tr_mode == "SIP" %>
+		<h2><%= h transaction.fund_id %></h2>
+        <%= f.label :amount %>
+  		<%= f.number_field :amount %>
+     	<%= f.label :sip_start_date %>
+  		<%= f.date_field :sip_start_date %>
+  		<%= f.label :sip_installments %>
+  		<%= f.number_field :sip_installments %>
+  		<%= f.label :sip_frequency %>
+  		<%= f.select :sip_frequency, ["Monthly","Weekly","Bi-Monthly"] %>
+  	<% end %>
+
+  	<% if transaction.tr_mode == "Lumpsum" %>
+		<h2><%= h transaction.fund_id %></h2>
+        <%= f.label :amount %>
+  		<%= f.number_field :amount %>
+ 		<%= f.label :reinvestment_tag %>
+  		<%= f.text_field :reinvestment_tag %>
+  	<% end %>
+
+    <% end %>
+  <% end %>
+  <p><%= submit_tag "Submit" %></p>
+<% end %>

@@ -14,7 +14,8 @@ Rv::Application.routes.draw do
     collection do
       get :investment
       post :invoice
-      
+      post :edit_individual
+      post :update_individual
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
