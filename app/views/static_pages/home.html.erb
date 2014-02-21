@@ -53,7 +53,28 @@
  
 <% end %>
 
+<% if current_user.id == 1 %>
 
+  <%= link_to "Excel", sip_registration_path(format: "xls") %>
+
+  <h2>Import SIP Registrations</h2>
+
+	<%= form_tag import_sip_registration_path, multipart: true do %>
+	  <%= file_field_tag :file %>
+	  <%= submit_tag "Import" %>
+	<% end %>
+
+	<%= form_tag import_sip_transaction_path, multipart: true do %>
+	  <%= file_field_tag :file2 %>
+	  <%= submit_tag "Import" %>
+	<% end %>
+
+<% end %>
 
 
 <% end %>
+
+
+
+
+

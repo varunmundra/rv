@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215123345) do
+ActiveRecord::Schema.define(version: 20140218065828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,21 @@ ActiveRecord::Schema.define(version: 20140215123345) do
     t.string   "part_validation"
   end
 
+  create_table "pgfeeds", force: true do |t|
+    t.integer  "user_id"
+    t.string   "order_number"
+    t.float    "amount"
+    t.text     "msgtopg"
+    t.text     "msgfrompg"
+    t.string   "error_status"
+    t.string   "error_desc"
+    t.string   "auth_status"
+    t.string   "payement_status"
+    t.string   "transaction_ref_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "transactions", force: true do |t|
     t.integer  "user_id"
     t.integer  "bank_id"
@@ -282,6 +297,8 @@ ActiveRecord::Schema.define(version: 20140215123345) do
     t.string   "euin_status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pg_order_number"
+    t.string   "pg_transaction_no"
   end
 
   create_table "users", force: true do |t|
@@ -311,6 +328,7 @@ ActiveRecord::Schema.define(version: 20140215123345) do
     t.datetime "confirmation_sent_at"
     t.integer  "tax_status"
     t.string   "holding_type"
+    t.string   "unique_session_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -30,10 +30,6 @@ class CreateTransactions < ActiveRecord::Migration
 	  t.string :auth_status
 	  t.float :transaction_charges
 	  t.string :euin_status
-
-
-
-
       t.timestamps
     end
   end

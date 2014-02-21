@@ -1,0 +1,37 @@
+<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th>Unique Mandate Registration No (UMRN)</th>
+				<th>Investor Name</th>
+				<th>Bank Account Holder Name</th>
+				<th>Bank Account No</th>
+				<th>Bank Account Type</th>
+				<th>MICR</th>
+				<th>Upper Limit Amount</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+			</tr>
+		</thead>
+
+	<% @bank_users.each do |user| %>
+	<% bank = Bank.find_by_user_id(user.id) %>
+		<tbody>
+
+		    <tr>
+		      <td></td>
+		      <td><%= bank.first_holder %></td>
+		      <td><%= bank.first_holder %></td>       
+		      <td><%= bank.account_num %></td>
+		      <td><%= bank.account_type %></td>
+		      <td><%= bank.micr_code %></td>
+		      <td><%= bank.sip_upper_limit %></td>
+		      <td><%= bank.created_at.strftime("%d/%m/%Y") %></td>
+		      <td><%= (bank.created_at+ bank.sip_validity.years).strftime("%d/%m/%Y") %></td>
+			</tr>
+		</tbody>
+
+	  <% end %>
+	</table>
+
+

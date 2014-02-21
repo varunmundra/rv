@@ -155,7 +155,7 @@ class BanksController < ApplicationController
 		if @bank.name_of_bank == "ICICI Bank"
 		 @bank.bankid_pg = "ICI"
 		end
-		@bank.sip_mandate_status = 0
+		@bank.sip_mandate_status = 1
 
 		if @bank.save	
 	      current_user.bank_status = 1
