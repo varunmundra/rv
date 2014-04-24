@@ -1,52 +1,7 @@
 <% if user_signed_in? %>
-  <li><%= link_to current_user.name, new_kyc_path %></li>
+  <!-- <li><%= link_to current_user.name, new_kyc_path %></li> -->
+  <li><%= link_to "Account", account_path  %></li>
 
-
-	<% if @kyc_exist %>
-	  		
-		 <%= form_tag(new_kyc_path, :method=>'post') do %>
-
-			 <p>
-			   KYC for : <br />
-			   <% if current_user.holding_type == '3' %>
-			   <%= select_tag("priority", options_for_select([['1st Holder', '1'],
-			                 ['2nd Holder', '2'],['3rd Holder','3']], '1')) %>
-			    <%end%>
-			    <% if current_user.holding_type == '2' %>
-			   <%= select_tag("priority", options_for_select([['1st Holder', '1'],
-			                 ['2nd Holder', '2']], '1')) %>
-			    <%end%>
-			    <% if current_user.holding_type == '1' %>
-			   <%= select_tag("priority", options_for_select([['1st Holder', '1']], '1')) %>
-			    <%end%>
-			 </p>
-
-			 <p>
-			   <%= submit_tag 'Submit' %>
-			 </p>
-		<% end %>
-
-
-
-
-	<%else%>
-
-		<%= form_tag(kycs_update_holding_type_path, :method=>'post') do %>
-
-			 <p>
-			   Priority: <br />
-			   <%= select_tag("holding_type", options_for_select([['Single', '1'],
-			                 ['Joint(2 holders)', '2'],['Joint(3 holders)','3']], '1')) %>
-			 </p>
-
-			 <p>
-			   <%= submit_tag 'Submit' %>
-			 </p>
-		<% end %>
-
-
-
-	<% end %>
 <%= link_to "Add a Bank", new_bank_path %><br>
 <% for bank in @banks %>
   <%= link_to " #{bank.name_of_bank}" , bank_path(bank.id) %><br>
@@ -55,7 +10,10 @@
 
 <% if current_user.id == 1 %>
 
+  <%= button_to "Upload Cams Data", :controller => 'transactions', :action => 'cams_upload_feed'  %>
+	<br>
   <%= link_to "Excel", sip_registration_path(format: "xls") %>
+
 
   <h2>Import SIP Registrations</h2>
 

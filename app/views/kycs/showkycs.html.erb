@@ -1,26 +1,41 @@
 <% if user_signed_in? %>
   <%= form_tag(new_kyc_path, :method=>'post') do %>
 
-		 <p>
-		   KYC for : <br />
-		   <% if current_user.holding_type == '3' %>
-		   <%= select_tag("priority", options_for_select([['1st Holder', '1'],
-		                 ['2nd Holder', '2'],['3rd Holder','3']], '1')) %>
-		    <%end%>
-		    <% if current_user.holding_type == '2' %>
-		   <%= select_tag("priority", options_for_select([['1st Holder', '1'],
-		                 ['2nd Holder', '2']], '1')) %>
-		    <%end%>
-		    <% if current_user.holding_type == '1' %>
-		   <%= select_tag("priority", options_for_select([['1st Holder', '1']], '1')) %>
-		    <%end%>
-		 </p>
+	 <p>
+	   KYC for : <br />
+	   <% if current_user.holding_type == '7' %>
+	   <%= select_tag("priority", options_for_select([['Minor', '1'],
+	                 ['Gaurdian', '4']], '1')) %>
+	   <%end%>
+	   <% if current_user.holding_type == '3' %>
+	   <%= select_tag("priority", options_for_select([['1st Holder', '1'],
+	                 ['2nd Holder', '2'],['3rd Holder','3']], '1')) %>
+	   <%end%>
+	   <% if current_user.holding_type == '2' %>
+	   <%= select_tag("priority", options_for_select([['1st Holder', '1'],
+	                 ['2nd Holder', '2']], '1')) %>
+	   <%end%>
+	    <% if current_user.holding_type == '1' %>
+	   <%= select_tag("priority", options_for_select([['1st Holder', '1']], '1')) %>
+	    <%end%>
+	     <% if current_user.holding_type == '4' %>
+	   <%= select_tag("priority", options_for_select([['1st Holder', '1']], '1')) %>
+	    <%end%>
+	     <% if current_user.holding_type == '5' %>
+	   <%= select_tag("priority", options_for_select([['1st Holder', '1']], '1')) %>
+	    <%end%>
+	     <% if current_user.holding_type == '6' %>
+	   <%= select_tag("priority", options_for_select([['1st Holder', '1']], '1')) %>
+	    <%end%>
 
-		 <p>
-		   <%= submit_tag 'Submit' %>
-		 </p>
-	<% end %>
+	 </p>
+
+	 <p>
+	   <%= submit_tag 'Submit' %>
+	 </p>
+  <% end %>
 	
+
 
   
 

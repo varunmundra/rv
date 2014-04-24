@@ -15,7 +15,9 @@
         "Punjab & Sind Bank","South Indian Bank","Shamrao Vitthal Co-operative Bank","Syndicate Bank","Union Bank of India",
         "UCO Bank","United Bank of India","Vijaya Bank","Yes Bank Ltd","ICICI Bank"],:include_blank => false%>
 	<%= f.input :account_num , label:'Account Number' %>
-	<%= f.input :account_type , label:'Account Type',collection: [ "Savings", "Current","NRI-NRO","NRI-NRE"],:include_blank => false %>
+
+	<%= f.input :account_type , label:'Account Type', :as => :select, :collection => [['Savings', 'SA'],
+	                 ['Current', 'CA'],['NRE', 'NRE'],['NRO', 'NRO']],:include_blank => false %>
 	<%= f.input :mode_of_holding, label:'Mode of holding',collection: [ "Single", "Joint"],:include_blank => false %>
 	<%= f.input :first_holder, label:'First Holder' %>
 	<%= f.input :second_holder, label:'Second Holder' %>

@@ -24,6 +24,12 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def account
+    if user_signed_in?
+      @kyc_exist = Kyc.find_by_user_id(current_user.id)
+    end
+  end
+
 
 
   def import_sip_registration
@@ -124,7 +130,7 @@ class StaticPagesController < ApplicationController
 
         File.open(params[:file2].path, 'r') do |f1|  
           while line = f1.gets  
-            a = line.split(",")
+            a = line.split("|")
             transaction = Transaction.find_by_id(a[0])
             if transaction
               transaction.pg_transaction_no = a[10]
@@ -149,4 +155,12 @@ class StaticPagesController < ApplicationController
 
   def products
   end
+
+  def portfolio
+    @holdings = Holding.find(:all, :conditions => ["user_id = ? ", current_user.id])
+
+      
+  end
+
+
 end

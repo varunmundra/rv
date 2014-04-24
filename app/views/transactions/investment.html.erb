@@ -23,7 +23,23 @@ Transaction Mode :<%= select_tag "tr_mode", options_for_select(["Lumpsum","SIP"]
 <%= hidden_field_tag "transactions[][registrar]", fund.registrar %>
 <%= hidden_field_tag "transactions[][user_id]", current_user.id %>
 <%= hidden_field_tag "transactions[][fund_id]", fund.id %>
-Transaction Type :<%= select_tag "transactions[][tr_type]", options_for_select(["Purchase","Redeem"]) %><br>
+Transaction Type :<%= select_tag "transactions[][tr_type]", options_for_select([["Purchase","P"],["Redeem","R"]]) %><br>
+
+<% holding1 = Holding.find(:first, :conditions => ["user_id = ? AND fund_id = ? ",current_user.id,fund.id]) %>
+<% holding2 = Holding.find(:first, :conditions => ["user_id = ? AND amc = ? ",current_user.id,fund.registrar_amc_code]) %>
+<% if holding1 %>
+Folio :<%= select_tag "transactions[][folio_id]", options_for_select([holding1.folio]) %><br>
+<% elsif holding2 %>
+Folio :<%= select_tag "transactions[][folio_id]", options_for_select([holding2.folio]) %><br>
+<% else %>
+Folio :<%= select_tag "transactions[][folio_id]", options_for_select([["New",'']]) %><br>
+<%end%>
+
+
+
+
+
+
 Amount(in Rs.) <%= number_field_tag "transactions[][amount]", fund.min_investment %><br>
 
 <div class="sip" style="display: none;">
@@ -35,7 +51,9 @@ Frequency :<%= select_tag "transactions[][sip_frequency]", options_for_select(["
 
 
 <% if fund.fund_type == "Dividend" %>
-Dividend Option :<%= select_tag "transactions[][reinvestment_tag]", options_for_select(["Reinvest","Payout"]) %><br>
+Dividend Option :<%= select_tag "transactions[][reinvestment_tag]", options_for_select([["Reinvest","Y"],["Payout","N"]]) %><br>
+<% else %>
+Dividend Option :<%= select_tag "transactions[][reinvestment_tag]", options_for_select([["Growth","Z"]]) %><br>
 <% end %>
 
 <%= hidden_field_tag "transactions[][pg_tr_status]", "Invoice" %>
@@ -46,7 +64,7 @@ Dividend Option :<%= select_tag "transactions[][reinvestment_tag]", options_for_
 
 <% end %>
 
-This is a :<%= select_tag "euin", options_for_select(["Execution Only","Advisory Based"]) %><br> transaction
+This is a :<%= select_tag "euin", options_for_select([["Execution Only","N"],["Advisory Based","Y"]]) %><br> transaction
 
 <%= submit_tag "Do Transaction" %>
 <% end %>	

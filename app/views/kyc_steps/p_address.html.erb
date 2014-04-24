@@ -1,5 +1,18 @@
 <%= simple_form_for @kyc, url: wizard_path  do |f| %>
-  
+  	<% if current_user.holding_type == "4" or "5" %>
+	 <h2>Permanent / Indian Address</h2>
+	<%= f.input :p_house_no, label:'House Number' %>
+	<%= f.input :p_street_name, label:'Street Name' %>
+	<%= f.input :p_area_name, label:'Area Name' %>
+	<%= f.input :p_city_town_village, label:'City' %>
+	<%= f.input :p_state, label:'State' %>
+	<%= f.input :p_country, label:'Country',:include_blank => false %>
+	<%= f.input :p_postal_code, label:'Postal Code' %>
+
+	<%= f.input :p_mobile, label:'Telephone no.' %>
+	<%= f.input :p_email, label:'Email id' %>
+	<%= f.input :p_proof_of_address, label:'Proof of Address',collection: [ "Passport", "Ration Card","Registered Lease / Sale Agreement of Residence","Driving License","Voter Identity Card","Latest Bank Account Statement/Passbook", "Latest Telephone Bill (only Land Line)","Latest Electricity Bill","Latest Gas Bill","Others(Not more than 3 months old)"],:include_blank => false %>
+   <% else %>
 
 	<h2>Permanent Address</h2>
 	<%= f.input :p_house_no, label:'House Number' %>
@@ -7,13 +20,13 @@
 	<%= f.input :p_area_name, label:'Area Name' %>
 	<%= f.input :p_city_town_village, label:'City',collection: ["Agra",	"Ahmedabad",	"Ajmer",	"Allahabad",	"Amritsar",	"Anand",	"Asansol",	"Aurangabad",	"Bangalore",	"Baroda",	"Bharuch",	"Bhavnagar",	"Bhopal",	"Bhubaneswar",	"Calicut",	"Chandigarh",	"Chennai",	"Coimbatore",	"Dehradun",	"Dharwad",	"Dubai",	"Durgapur",	"Erode",	"Guntur",	"Guwahati",	"Hubli",	"Hyderabad",	"Indore",	"Jaipur",	"Jalandhar",	"Jalgaon",	"Jamnagar",	"Jamshedpur",	"Jodpur",	"Kanpur",	"Karaikudi",	"Kochi",	"Kolkata",	"Kota",	"Kottayam",	"Lucknow",	"Ludhiana",	"Mangalore",	"Meerut",	"Moradabad",	"Mumbai",	"Mysore",	"Nagpur",	"Nasik",	"New Delhi",	"Panjim",	"Patna",	"Pondicherry",	"Pune",	"Raipur",	"Rajahmundry",	"Rajkot",	"Ranchi",	"Salem",	"Siliguri",	"Surat",	"Tirunelveli",	"Tirupur",	"Trichy",	"Trivandrum",	"Udaipur",	"Varanasi",	"Vashi",	"Vijayawada",	"Others"],:include_blank => false %>
 	<%= f.input :p_state, label:'State',collection: ["Andhra Pradesh",	"Arunachal Pradesh",	"Assam",	"Bihar",	"Chandigarh",	"Delhi",	"Goa",	"Gujarat",	"Haryana",	"Himachal Pradesh",	"Jammu And Kashmir",	"Karnataka",	"Kerala",	"Madhya Pradesh",	"Maharashtra",	"Manipur",	"Meghalaya",	"Mizoram",	"Nagaland",	"Orissa",	"Punjab",	"Rajasthan",	"Tamil Nadu",	"Tripura",	"Uttar Pradesh",	"West Bengal",	"Others"],:include_blank => false %>
-	<%= f.input :p_country, label:'Country'  ,priority: [ "India" ] %>
+	<%= f.input :p_country, label:'Country'  ,collection: [ "India" ] ,:include_blank => false %>
 	<%= f.input :p_postal_code, label:'Postal Code' %>
 	<%= f.input :p_landline, label:'Landline no.' %>
 	<%= f.input :p_mobile, label:'Mobile no.',hint: 'Please fill either landline no. or mobile no.' %>
 	<%= f.input :p_email, label:'Email id' %>
 	<%= f.input :p_proof_of_address, label:'Proof of Address',collection: [ "Passport", "Ration Card","Registered Lease / Sale Agreement of Residence","Driving License","Voter Identity Card","Latest Bank Account Statement/Passbook", "Latest Telephone Bill (only Land Line)","Latest Electricity Bill","Latest Gas Bill","Others(Not more than 3 months old)"],:include_blank => false %>
-
+	<% end %>
 
   
 	

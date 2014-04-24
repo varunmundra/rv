@@ -4,10 +4,12 @@ Rv::Application.routes.draw do
   match '/home',    to: 'static_pages#home',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/products', to: 'static_pages#products', via: 'get'
+  match '/account', to: 'static_pages#account', via: 'get'
   match '/sip_registration', to: 'static_pages#sip_registration', via: 'get'
   match '/import_sip_registration', to: 'static_pages#import_sip_registration', via: 'post'
   match '/import_sip_transaction', to: 'static_pages#import_sip_transaction', via: 'post'
   match '/sip_transactions', to: 'static_pages#sip_transactions', via: 'get'
+  match '/portfolio', to: 'static_pages#portfolio', via: 'get'
   resources :kycs
   resources :kyc_steps
   resources :funds
@@ -22,6 +24,12 @@ Rv::Application.routes.draw do
       post :update_individual
       get :ru
       post :confirmation
+      post :cams_upload_feed
+      post :cams_import_feed
+      post :transact
+      get :switch
+      post :switch_transact
+      post :karvy_upload_feed
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

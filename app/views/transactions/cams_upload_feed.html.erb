@@ -1,0 +1,22 @@
+<%= @sh %>
+
+<% if current_user.id == 1 %>
+
+doneeee
+
+
+
+<%= form_tag cams_import_feed_transactions_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+
+
+
+
+
+
+
+
+<% end %>

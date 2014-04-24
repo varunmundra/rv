@@ -1,10 +1,29 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#checkbox1').change(function() {
+        $('#nominee').toggle();
+    });
+});
+
+
+
+</script>
+
+
 <%= simple_form_for @kyc, url: wizard_path  do |f| %>
    
 <h2>Nominee Details</h2>
+
+
+
+	<%= f.input :nominee_flag, hint:'I do not wish to appoint a nominee for my investment', input_html: { id: 'checkbox1' }, label: false,value:true %>
+<div id = "nominee">
 	<%= f.input :nominee_name, label:'Nominee Name' %>
 	<%= f.input :nominee_relation, label:'Nominee Relation' %>
 	<%= f.input :nominee_address, label:'Nominee Address' %>
-	
+	<%= f.input :nominee_dob, label:'Nominee Date of Birth' %>
+	<%= f.input :nominee_gaurdian, label:'Nominee Gaurdian' %>
+</div>
 
 
   
