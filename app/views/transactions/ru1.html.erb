@@ -1,0 +1,38 @@
+<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				
+				<th>Scheme Name</th>
+				<th>Folio</th>
+				<th>Transaction ID</th>
+				<th>Amount</th>
+				<th>Dividend Option</th>
+			</tr>
+		</thead>
+
+	<% @transactions_pg.each do |transaction| %>
+	<% @fund = Fund.find_by_id(transaction.fund_id) %>
+		<tbody>
+
+		    <tr>
+		      <td><%= @fund.scheme_name %></td>      
+		      <td><%= transaction.folio_id %></td>
+		      <td><%= transaction.tr_id %></td>
+		      <td><%= transaction.amount %></td>
+		      <td><%= transaction.reinvestment_tag %></td>
+			</tr>
+		</tbody>
+
+	  <% end %>
+	</table>
+
+
+<%= @msgtopg %>
+
+<%= form_tag confirmation_transactions_path :method => :put do %>
+   <%= text_field_tag "msgpg" %>
+  <p><%= submit_tag "Submit" %></p>
+<% end %>
+
+

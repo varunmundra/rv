@@ -45,3 +45,5 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'jquery-ui-rails'
 gem 'devise_security_extension'
 gem 'roo'
+gem 'unicorn'
+gem 'rest-client', '~> 1.6.7'

@@ -125,9 +125,14 @@ class TransactionsController < ApplicationController
 		
 		
 	end
-
-
+	
 	def ru
+		
+		response = RestClient.post 'https://www.billdesk.com/pgidsk/pgmerc/RUPVESTMFRedirect.jsp', :msg => 'RUPVESTMF|27|1232465646546|2.00|IDB|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|E7ACACE724B9CF20963A984A9AF9B62C4F15995C83032720DA00E905E969CC7C'
+  		@show = response.to_str
+  	end
+
+	def ru1
 		require 'digest/hmac'
 		@transactions_pg = Transaction.find(:all, :conditions => ["user_id = ? AND pg_tr_status = ?  AND tr_mode = ? ",current_user.id, "Invoice", "Lumpsum"])
 		
