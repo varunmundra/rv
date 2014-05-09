@@ -1,6 +1,12 @@
 Rv::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  root :to => 'static_pages#home'
+  root :to => 'static_pages#index'
+  get "academics/video"
+  get "academics/videos"
+  get "academics/images"
+  get "academics/videoteaser"
+  match '/',    to: 'static_pages#index',    via: 'get'
+  match '/',    to: 'static_pages#index',    via: 'post'
   match '/home',    to: 'static_pages#home',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/products', to: 'static_pages#products', via: 'get'
@@ -10,6 +16,9 @@ Rv::Application.routes.draw do
   match '/import_sip_transaction', to: 'static_pages#import_sip_transaction', via: 'post'
   match '/sip_transactions', to: 'static_pages#sip_transactions', via: 'get'
   match '/portfolio', to: 'static_pages#portfolio', via: 'get'
+  match '/contacts',     to: 'contacts#new',             via: 'get'
+  resources "contacts", only: [:new, :create]
+  get "contacts/welcome_email"
   resources :kycs
   resources :kyc_steps
   resources :funds

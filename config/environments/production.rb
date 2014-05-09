@@ -78,7 +78,7 @@ Rv::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { :host => 'http://afternoon-oasis-7449.herokuapp.com/' }
+  config.action_mailer.default_url_options = { :host => 'https://www.rupeevest.com' }
 
   config.action_mailer.delivery_method = :smtp 
 end

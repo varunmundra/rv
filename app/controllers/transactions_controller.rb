@@ -127,9 +127,23 @@ class TransactionsController < ApplicationController
 	end
 	
 	def ru
-		
-		response = RestClient.post 'https://www.billdesk.com/pgidsk/pgmerc/RUPVESTMFRedirect.jsp', :msg => 'RUPVESTMF|27|1232465646546|2.00|IDB|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|E7ACACE724B9CF20963A984A9AF9B62C4F15995C83032720DA00E905E969CC7C'
-  		@show = response.to_str
+		@d ='2222222'
+		uri = URI.parse("https://www.billdesk.com/pgidsk/pgmerc/RUPVESTMFRedirect.jsp")
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		data = "msg=RUPVESTMF|27|1232465646546|2.00|IDB|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|E7ACACE724B9CF20963A984A9AF9B62C4F15995C83032720DA00E905E969CC7C"
+		headers = {
+			'Referer' => 'https://www.rupeevest.com/transactions/ru'
+		}
+		#request = Net::HTTP::Post.new(uri.request_uri)
+		#request.set_form_data({:msg=>'RUPVESTMF|27|1232465646546|2.00|IDB|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|E7ACACE724B9CF20963A984A9AF9B62C4F15995C83032720DA00E905E969CC7C'})
+		#request['HTTP_REFERER'] = 'https://www.rupeevest.com/transactions/ru'
+		#response = RestClient.post 'https://www.billdesk.com/pgidsk/pgmerc/RUPVESTMFRedirect.jsp', 'msg=RUPVESTMF|27|1232465646546|2.00|IDB|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|E7ACACE724B9CF20963A984A9AF9B62C4F15995C83032720DA00E905E969CC7C'
+  		#response = Net::HTTP.post_form(uri,{:msg=>'RUPVESTMF|27|1232465646546|2.00|IDB|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|E7ACACE724B9CF20963A984A9AF9B62C4F15995C83032720DA00E905E969CC7C'})
+  		response = http.post(uri.path,data,headers)
+  		@d = response.body
+  		@d2 = response.code
+  		
   	end
 
 	def ru1

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 and JavaScript Contact Form | Onextrapixel</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="author" content="@toddmotto">
+
+  <link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
+  <link href="assets/contact.css" rel="stylesheet">
+</head>
+
+<body>
+  
+  <div class="wrapper">
+    <div id="main" style="padding:50px 0 0 0;">
+    
+    <!-- Form -->
+  <%= simple_form_for @contact, :html => {:id => 'contact-form' } do |f| %>
+      <h3><b>Get in touch</b></h3>
+      <h4><b>Fill in the form below, and we'll get back to you within 24 hours.</b></h4>
+      <div>
+        <label>
+          <span>Name: *</span>
+          <input placeholder="Please enter your name" type="text" tabindex="1" pattern="[a-zA-Z. ]{1,50}" id="contact_name" name="contact[name]" required autofocus>
+        </label>
+      </div>
+      <div>
+        <label>
+          <span>Email: *</span>
+          <input placeholder="Please enter your email address" type="email" tabindex="2" id="contact_email" name="contact[email]"  required>
+        </label>
+      </div>
+      <div>
+        <label>
+          <span>Mobile: * (Do not include zero)</span>
+          <input placeholder="Please enter your number" type="tel" tabindex="3" pattern="[0-9]{10}" maxlength="10" id="contact_phone" name="contact[phone]" required>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Message:</span>
+          <textarea placeholder="Include all the details you can" tabindex="4" name="contact[message]" id="contact_message" ></textarea>
+        </label>
+      </div>
+      <div>
+        <button name="submit" type="submit" id="contact-submit" name="commit">Send Email</button>
+      </div>
+  <% end %>
+    <!-- /Form -->
+    
+    </div>
+  </div>
+
+  <script src="assets/contact.js"></script>
+  
+</body>
+</html>
