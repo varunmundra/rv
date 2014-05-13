@@ -5,13 +5,14 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(params[:contact])
+    @contact = Contact.new(contact_params)
     
     # @contact.request = request
     
     if @contact.save
-      ContactMailer.welcome_email(@contact).deliver
-      flash.now[:notice] = 'Thank you for your message. We will contact you soon!'      
+      ContactMailer.contact_confirmation(@contact).deliver
+      flash.now[:notice] = 'Thank you for your message. We will contact you soon!' 
+      redirect_to :controller=>'static_pages', :action => 'index'     
     else
       flash.now[:error] = 'Cannot send message.'
       render :new
@@ -19,9 +20,16 @@ class ContactsController < ApplicationController
   
   end
 
-  def welcome_email
-   
-  end
+  private
+    def contact_params
+      params.require(:contact).permit(:name,:email, :phone, :message)
+      
+
+    end
+
+
+
+ 
 end
 
 

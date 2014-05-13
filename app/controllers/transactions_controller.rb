@@ -127,6 +127,9 @@ class TransactionsController < ApplicationController
 	end
 	
 	def ru
+	end
+
+	def ru2
 		@d ='2222222'
 		uri = URI.parse("https://www.billdesk.com/pgidsk/pgmerc/RUPVESTMFRedirect.jsp")
 		http = Net::HTTP.new(uri.host, uri.port)

@@ -32,6 +32,7 @@ Rv::Application.routes.draw do
       post :edit_individual
       post :update_individual
       get :ru
+      post :ru
       post :confirmation
       post :cams_upload_feed
       post :cams_import_feed

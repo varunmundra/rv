@@ -1,6 +1,17 @@
-<%= @d %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+       <form method="post" action="https://www.billdesk.com/pgidsk/pgmerc/RUPVESTMFRedirect.jsp">
+               <input type="text" name="msg" value="RUPVESTMF|27|1232465646546|2.00|HDF|NA|NA|INR|DIRECT|R|rupvestmf|NA|NA|F|NA|NA|ARN-86572|HDFCMFD-NA-NA-NA|LIQUID|RESIDENT-15425-NA-NA-NA-NA-L-NA-NA|20140422161151-2.00-NA-NA-NA|https://rupeevest.com/transactions/ru|1283C42EA00EF98EE9BA3BB4D4E732928B97E50BF32E20B2ADC1664701050426" />
+               <input type="submit" />
+       </form>
+</body>
+</html>
 
 
-----------------
-<%= @d2 %>
 
+
+<%= params[:msg] %>
