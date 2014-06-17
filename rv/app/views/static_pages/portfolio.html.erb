@@ -1,0 +1,58 @@
+<script type="text/javascript">
+$(document).ready(function() { 
+$(".switch").click(function () {
+  var $checkboxes = $("input[type='checkbox']");
+  if ($("input[type='checkbox']:checked").length > 1) {
+    $("input[type='checkbox']").removeAttr("checked");
+    alert("Please select one user at a time for editing.");
+    return false;
+    }
+});
+
+});	
+
+</script>
+
+<%= form_tag transact_transactions_path do %>
+
+
+<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th></th>
+				<th>Scheme Name</th>
+				<th>Units Held</th>
+				<th>Buy Value</th>
+				<th>Current Value</th>
+				<th>Gains/Losses</th>
+				<th>Return</th>
+			</tr>
+		</thead>
+
+	<% @holdings.each do |holding| %>
+	<% fund = Fund.find_by_id(holding.fund_id) %>
+		<tbody>
+
+		    <tr>
+		      <td><%= check_box_tag "holding_ids[]", holding.id %></td>
+		      <td><%= fund.scheme_name %></td>      
+		      <td><%= holding.units %></td>
+		      <td><%= holding.buy_value %></td>
+		      <td><%= (holding.units * fund.nav).round(2) %></td>
+		      <td><%= ((holding.units * fund.nav) - holding.buy_value).round(2)  %></td>
+		      <td><%= ((((holding.units * fund.nav) - holding.buy_value)/holding.buy_value)*100).round(2)  %>%</td>
+		     
+			</tr>
+		</tbody>
+
+	  <% end %>
+	</table>
+
+<p><%= submit_tag "Sell" %></p>
+
+<p><%= submit_tag 'Buy', :name => 'buy' %></p>
+<%= submit_tag "Switch", :name => 'switch', :class => 'switch'  %>
+
+<% end %>
+

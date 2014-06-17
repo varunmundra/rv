@@ -1,0 +1,2 @@
+module KycsHelper
+end

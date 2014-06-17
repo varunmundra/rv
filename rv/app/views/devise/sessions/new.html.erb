@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/devise.css">
+</head>
+<html>
+<body>
+<div class="container">
+<div id="verticalLine" >
+<h2>Sign in</h2><br>
+
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <fieldset>
+  <div class="form-inputs">
+    <%= f.input :email, :required => false, :autofocus => true,:input_html => {:style=> 'width: 250px'} %>
+    <%= f.input :password, :required => false,:input_html => {:style=> 'width: 250px'} %>
+    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign in" %>
+   
+  </div>
+  </fieldset>
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+<% end -%>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+<% end -%>
+
+
+</div>
+
+<div align="left" style="position:absolute; font-size: 30pt; margin-left:13cm;margin-top: 150px;">
+OR
+</div>
+<div align="center" style="position:absolute;margin-left:15cm;margin-top: 125px;">
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to image_tag("google_logo.png", alt: "slate"), omniauth_authorize_path(resource_name, provider)  %><br>
+    <h2><%= link_to  "Sign in with Gmail", omniauth_authorize_path(resource_name, provider) %></h2>
+  <% end -%>
+<% end -%>
+
+
+</div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+
+#bd_investing{
+	
+	background: #1abc9c;
+}
+
+#head_investing{
+	margin-top: 0.75cm;
+	background: #60C060;
+}
+
+#bd_investing .container{
+	max-width:none; 
+	width: 1200px;
+}

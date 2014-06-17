@@ -1,0 +1,56 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/devise.css">
+
+  </head>
+<body>
+<div class="container">
+
+<div id="verticalLine" >
+
+<h2>Sign up</h2><br>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= f.input :email, :required => true, :autofocus => true,:input_html => {:style=> 'width: 250px'} %>
+    <%= f.input :name, :required => true,:input_html => {:style=> 'width: 250px'} %>
+    <%= f.input :password, :required => true,:input_html => {:style=> 'width: 250px'} %>
+    <%= f.input :password_confirmation, :required => true,:input_html => {:style=> 'width: 250px'} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<%- if controller_name != 'sessions' %>
+  <%= link_to "Sign in", new_session_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+<% end -%>
+
+</div>
+<div align="left" style="position:absolute; font-size: 30pt; margin-left:13cm;margin-top: 150px;">
+OR
+</div>
+<div align="center" style="position:absolute;margin-left:15cm;margin-top: 125px;">
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to image_tag("google_logo.png", alt: "slate"), omniauth_authorize_path(resource_name, provider)  %><br>
+    <h2><%= link_to  "Sign in with Gmail", omniauth_authorize_path(resource_name, provider) %></h2>
+  <% end -%>
+<% end -%>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+
+<% if @sip_lumpsum == 1 %>
+<%= form_tag edit_individual_transactions_path do %>
+	<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th></th>
+				<th>Scheme Name</th>
+				<th>Folio</th>
+				<th>SIP Day</th>
+				<th>No of months</th>
+				<th>Dividend Option</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+
+	<% @transactions_invoice.each do |transaction| %>
+	<% @fund = Fund.find_by_id(transaction.fund_id) %>
+		<tbody>
+
+		    <tr>
+		      <td><%= check_box_tag "transaction_ids[]", transaction.id %></td>
+		      <td><%= @fund.scheme_name %></td>      
+		      <td><%= transaction.folio_id %></td>
+		      <td><%= transaction.sip_start_date %></td>
+		      <td><%= transaction.sip_installments %></td>
+		      <td><%= transaction.reinvestment_tag %></td>
+		      <td><%= transaction.amount %></td>
+		      
+			</tr>
+		</tbody>
+
+	  <% end %>
+	</table>
+
+<%= button_to "Cams feed", { :controller => "transactions", :action => "cams_upload_feed"} %>
+<%= button_to "Karvy feed2222222", { :controller => "transactions", :action => "karvy_upload_feed"} %>
+
+<p><%= submit_tag "Edit Checked" %></p>
+
+<p><%= submit_tag 'Destroy', :name => 'destroy_button' %></p>
+<% end %>
+
+<%= link_to "Make Payement", ru_transactions_path %>
+<% end %>
+<% if @sip_lumpsum == 0 %>
+<%= form_tag edit_individual_transactions_path do %>
+
+	<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th></th>
+				<th>Scheme Name</th>
+				<th>Folio</th>
+				<th>Transaction ID</th>
+				<th>Amount</th>
+				<th>Dividend Option</th>
+			</tr>
+		</thead>
+
+	<% @transactions_invoice.each do |transaction| %>
+	<% @fund = Fund.find_by_id(transaction.fund_id) %>
+		<tbody>
+
+		    <tr>
+		      <td><%= check_box_tag "transaction_ids[]", transaction.id %></td>	
+		      <td><%= @fund.scheme_name %></td>      
+		      <td><%= transaction.folio_id %></td>
+		      <td><%= transaction.tr_id %></td>
+		      <td><%= transaction.amount %></td>
+		      <td><%= transaction.reinvestment_tag %></td>
+			</tr>
+		</tbody>
+
+	  <% end %>
+	</table>
+
+<p><%= submit_tag "Edit Checked" %></p>
+
+<p><%= submit_tag 'Destroy', :name => 'destroy_button' %></p>
+<% end %>
+
+<%= link_to "Make Payement", ru_transactions_path %>
+<%end%>
+
+
+
+<% if @redemption == 1 %>
+
+<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th>Scheme Name</th>
+				<th>Folio</th>
+				<th>Transaction ID</th>
+				<th>Redemtion Type</th>
+			</tr>
+		</thead>
+
+	<% @transactions_redeem.each do |transaction| %>
+	<% @fund = Fund.find_by_id(transaction.fund_id) %>
+		<tbody>
+
+		    <tr>
+		      <td><%= @fund.scheme_name %></td>      
+		      <td><%= transaction.folio_id %></td>
+		      <td><%= transaction.tr_id %></td>
+		      <td><%= transaction.tr_mode %></td>
+			</tr>
+		</tbody>
+
+	  <% end %>
+	</table>
+
+ <%= button_to "Redeem (Upload Cams Data)", :controller => 'transactions', :action => 'cams_upload_feed'  %>
+
+
+<% end %>
+
+
+

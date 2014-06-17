@@ -1,0 +1,10 @@
+
+#verticalLine {
+
+    border-right: 5px solid silver;
+    float: left;
+    border-radius: 5px;
+    margin: 10%;
+    padding-right: 5%;
+    
+}

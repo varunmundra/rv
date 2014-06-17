@@ -1,0 +1,102 @@
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+
+$(".partial_full").change(function(){
+	var parent = $(this).parent().parent();
+	var targetTextBox = parent.find('.amt');
+  	var targetFixedBox = parent.find('.amt1');
+
+  if ($(this).val()=="Partial Redemption") {
+	targetTextBox.show();
+	targetFixedBox.hide();
+	   }
+  if ($(this).val()=="Full Redemption") {
+  	targetTextBox.hide();
+	targetFixedBox.show();}
+  	})
+
+
+
+});
+
+</script>
+
+
+
+Switch from:
+
+<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th>Scheme Name</th>
+				<th>Units Held</th>
+				<th>Buy Value</th>
+				<th>Current Value</th>
+				<th>Gains/Losses</th>
+				<th>Return</th>
+			</tr>
+		</thead>
+
+	<% fund = Fund.find_by_id(@holding.fund_id) %>
+		<tbody>
+
+		    <tr>
+		      <td><%= fund.scheme_name %></td>      
+		      <td><%= @holding.units %></td>
+		      <td><%= @holding.buy_value %></td>
+		      <td><%= (@holding.units * fund.nav).round(2) %></td>
+		      <td><%= ((@holding.units * fund.nav) - @holding.buy_value).round(2)  %></td>
+		      <td><%= ((((@holding.units * fund.nav) - @holding.buy_value)/@holding.buy_value)*100).round(2)  %>%</td>
+		     
+			</tr>
+		</tbody>
+
+	 
+</table>
+
+
+
+
+<br>Switch to<br>:
+
+
+
+<%= form_tag switch_transact_transactions_path do %>
+
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th>Fund Name</th>
+    <th>Category</th>
+    <th>Average AUM</th>
+    <th>Fund Type</th>
+    <th>Expense Ratio</th>
+    <th>Check</th> 
+  </tr>
+</thead>
+<tbody>
+  <% @fundsto.each do |fund| %>
+    <tr>
+      <td><%= link_to "#{fund.scheme_name}", fund_path(fund.id) %></td>
+      <td><%= fund.category %></td>
+      <td><%= fund.net_assets %></td>
+      <td><%= fund.fund_type %></td>
+      <td><%= fund.expense_ratio %></td>
+      <td><%= radio_button_tag "fund_id_switch", fund.id %></td> 
+    </tr>
+  <% end %>
+ </tbody>
+
+</table>
+
+
+<%= select_tag "partial_or_full", options_for_select(["Partial Redemption","Full Redemption"]),:class => "partial_full" %></td>
+
+<div class = "amt"> Please fill the amount to be switched :<%= number_field_tag "amount"%></div>
+<div class = "amt1" style="display: none;">Units switched :<%= @holding.units %></div>
+
+<p><%= submit_tag "Switch" %></p>
+<% end %>

@@ -1,0 +1,75 @@
+<script type="text/javascript">
+$(document).ready(function () {
+$("#txn").change(function(){
+  if ($("#txn").val()=="SIP") {$(".sip").show(); }
+  if ($("#txn").val()=="Lumpsum") {$(".sip").hide();  }
+  })
+
+});
+
+
+
+</script>
+
+<%= form_tag invoice_transactions_path do %>
+<h3>Select Bank <%= select_tag "bankid", options_from_collection_for_select(@banks, "id", "name_of_bank") %><br></h3>
+
+Transaction Mode :<%= select_tag "tr_mode", options_for_select(["Lumpsum","SIP"]),:id => "txn" %><br>
+
+-----------------------------------------------------------------------------------------------------------------<br>
+<% @funds.each do |fund| %>
+<h4><%= fund.scheme_name %><br></h4>	
+<%= hidden_field_tag "transactions[][liq_non]", fund.category %>
+<%= hidden_field_tag "transactions[][registrar]", fund.registrar %>
+<%= hidden_field_tag "transactions[][user_id]", current_user.id %>
+<%= hidden_field_tag "transactions[][fund_id]", fund.id %>
+Transaction Type :<%= select_tag "transactions[][tr_type]", options_for_select([["Purchase","P"],["Redeem","R"]]) %><br>
+
+<% holding1 = Holding.find(:first, :conditions => ["user_id = ? AND fund_id = ? ",current_user.id,fund.id]) %>
+<% holding2 = Holding.find(:first, :conditions => ["user_id = ? AND amc = ? ",current_user.id,fund.registrar_amc_code]) %>
+<% if holding1 %>
+Folio :<%= select_tag "transactions[][folio_id]", options_for_select([holding1.folio]) %><br>
+<% elsif holding2 %>
+Folio :<%= select_tag "transactions[][folio_id]", options_for_select([holding2.folio]) %><br>
+<% else %>
+Folio :<%= select_tag "transactions[][folio_id]", options_for_select([["New",'']]) %><br>
+<%end%>
+
+
+
+
+
+
+Amount(in Rs.) <%= number_field_tag "transactions[][amount]", fund.min_investment %><br>
+
+<div class="sip" style="display: none;">
+Investment Date :<%= date_field_tag "transactions[][sip_start_date]"%><br>
+No. of installments :<%= number_field_tag "transactions[][sip_installments]" %><br>
+Frequency :<%= select_tag "transactions[][sip_frequency]", options_for_select(["Monthly","Weekly","Bi-Monthly"]) %><br>
+
+</div>
+
+
+<% if fund.fund_type == "Dividend" %>
+Dividend Option :<%= select_tag "transactions[][reinvestment_tag]", options_for_select([["Reinvest","Y"],["Payout","N"]]) %><br>
+<% else %>
+Dividend Option :<%= select_tag "transactions[][reinvestment_tag]", options_for_select([["Growth","Z"]]) %><br>
+<% end %>
+
+<%= hidden_field_tag "transactions[][pg_tr_status]", "Invoice" %>
+<%= hidden_field_tag "transactions[][registrar_tr_status]", "Invoice" %>
+
+----------------------------------------------------------------------------------------------------------------------
+<br>
+
+<% end %>
+
+This is a :<%= select_tag "euin", options_for_select([["Execution Only","N"],["Advisory Based","Y"]]) %><br> transaction
+
+<%= submit_tag "Do Transaction" %>
+<% end %>	
+
+
+
+
+

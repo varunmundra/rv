@@ -1,0 +1,40 @@
+
+<%= simple_form_for @bank  do |f| %>
+			
+  <h2>Banking  Information</h2>
+   
+  	
+  	<%= f.input :name_of_bank , label:'Bank Name',collection:["Kotak Bank","Allahabad Bank","Bank of India","State Bank of Hyderabad","State Bank of India","State Bank of Bikaner & Jaipur", "State Bank of Mysore", "State Bank of Patiala",
+  		"State Bank of Travancore", "City Union Bank", "HDFC Bank","Tamilnad Mercantile Bank Ltd.", "Axis Bank",
+  		"Andhra Bank", "Bank of Baroda - Corporate Banking","Bank of Bahrain and Kuwait","Bank of Baroda - Retail Banking",
+  		"Bank of Maharashtra","Central Bank of India","Canara Bank","Punjab National Bank - Corporate Banking",
+  		"Corporation Bank","Catholic Syrian Bank","Deutsche Bank","Development Credit Bank","Dhanlakshmi Bank","Federal Bank",
+  		"IDBI Bank", "IndusInd Bank", "Indian Bank", "ING Vysya Bank", "Indian Overseas Bank", "Jammu & Kashmir Bank", 
+  		"Karnataka Bank Ltd", "Karur Vysya Bank", "Laxmi Vilas Bank - Corporate Net Banking", 
+        "Laxmi Vilas Bank - Retail Net Banking", "Oriental Bank of Commerce","Punjab National Bank - Retail Banking",
+        "Punjab & Sind Bank","South Indian Bank","Shamrao Vitthal Co-operative Bank","Syndicate Bank","Union Bank of India",
+        "UCO Bank","United Bank of India","Vijaya Bank","Yes Bank Ltd","ICICI Bank"],:include_blank => false%>
+	<%= f.input :account_num , label:'Account Number' %>
+
+	<%= f.input :account_type , label:'Account Type', :as => :select, :collection => [['Savings', 'SA'],
+	                 ['Current', 'CA'],['NRE', 'NRE'],['NRO', 'NRO']],:include_blank => false %>
+	<%= f.input :mode_of_holding, label:'Mode of holding',collection: [ "Single", "Joint"],:include_blank => false %>
+	<%= f.input :first_holder, label:'First Holder' %>
+	<%= f.input :second_holder, label:'Second Holder' %>
+	<%= f.input :branch_address, label:'Branch Address' %>
+	<%= f.input :city, label:'City' %>
+	<%= f.input :ifsc_code, label:'IFSC Code' %>
+	<%= f.input :micr_code, label:'MICR Code' %>
+	<%= f.input :sip_validity, label:'Years of validity for SIP mandate' %>
+	<%= f.input :sip_upper_limit, label:'Maximum Per-day Amount for the mandate' %>
+	
+</div>
+
+	
+  <p><%= f.submit "Save" %></p>
+  
+<% end %>
+
+
+
+	
